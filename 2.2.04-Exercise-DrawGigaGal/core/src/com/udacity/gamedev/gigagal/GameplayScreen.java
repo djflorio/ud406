@@ -15,7 +15,7 @@ public class GameplayScreen extends ScreenAdapter {
     public static final String TAG = GameplayScreen.class.getName();
 
     // TODO: Add a Level
-
+    private Level level;
     SpriteBatch batch;
     ExtendViewport viewport;
 
@@ -25,7 +25,7 @@ public class GameplayScreen extends ScreenAdapter {
         Assets.instance.init(am);
 
         // TODO: Initialize Level
-
+        level = new Level();
         batch = new SpriteBatch();
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
     }
@@ -43,7 +43,7 @@ public class GameplayScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         // TODO: Call update() on the Level
-
+        level.update(delta);
         viewport.apply();
         Gdx.gl.glClearColor(
                 Constants.BACKGROUND_COLOR.r,
@@ -55,7 +55,7 @@ public class GameplayScreen extends ScreenAdapter {
         batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();
         // TODO: Render the Level
-
+        level.render(batch);
         batch.end();
     }
 }

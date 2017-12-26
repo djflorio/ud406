@@ -21,7 +21,7 @@ public class GigaGal {
     JumpState jumpState;
 
     // TODO: Add WalkState member
-
+    private WalkState walkState;
 
     long jumpStartTime;
 
@@ -32,7 +32,7 @@ public class GigaGal {
         facing = Facing.RIGHT;
 
         // TODO: Initialize walkState
-
+        walkState = WalkState.STANDING;
     }
 
     public void update(float delta) {
@@ -56,7 +56,7 @@ public class GigaGal {
             moveRight(delta);
         } else {
             // TODO: Set walkState to STANDING
-
+            walkState = WalkState.STANDING;
         }
 
         if (Gdx.input.isKeyPressed(Keys.Z)) {
@@ -74,14 +74,14 @@ public class GigaGal {
 
     private void moveLeft(float delta) {
         // TODO: Set walkState to WALKING
-
+        walkState = WalkState.WALKING;
         facing = Facing.LEFT;
         position.x -= delta * Constants.GIGAGAL_MOVE_SPEED;
     }
 
     private void moveRight(float delta) {
         // TODO: Set walkState to WALKING
-
+        walkState = WalkState.WALKING;
         facing = Facing.RIGHT;
         position.x += delta * Constants.GIGAGAL_MOVE_SPEED;
     }
@@ -116,12 +116,16 @@ public class GigaGal {
         // TODO: Select the correct sprite based on facing, jumpState, and walkState
         if (facing == Facing.RIGHT && jumpState != JumpState.GROUNDED) {
             region = Assets.instance.gigaGalAssets.jumpingRight;
-        } else if (facing == Facing.RIGHT) {
+        } else if (facing == Facing.RIGHT && walkState == WalkState.STANDING) {
             region = Assets.instance.gigaGalAssets.standingRight;
-        }  else if (facing == Facing.LEFT && jumpState != JumpState.GROUNDED) {
+        } else if (facing == Facing.RIGHT) {
+            region = Assets.instance.gigaGalAssets.walkingRight;
+        } else if (facing == Facing.LEFT && jumpState != JumpState.GROUNDED) {
             region = Assets.instance.gigaGalAssets.jumpingLeft;
-        } else if (facing == Facing.LEFT) {
+        } else if (facing == Facing.LEFT && walkState == WalkState.STANDING) {
             region = Assets.instance.gigaGalAssets.standingLeft;
+        } else if (facing == Facing.LEFT) {
+            region = Assets.instance.gigaGalAssets.walkingLeft;
         }
 
         batch.draw(
@@ -156,5 +160,8 @@ public class GigaGal {
 
 
     // TODO: Do this first!!! Add WalkState enum containing STANDING and WALKING
-
+    enum WalkState {
+        STANDING,
+        WALKING
+    }
 }

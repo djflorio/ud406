@@ -1,9 +1,11 @@
 package com.udacity.gamedev.gigagal.util;
 
+import com.badlogic.gdx.graphics.Color;
+
 public class Constants {
 
     // TODO: Set a BACKGROUND_COLOR We recommend Color.SKY
-
+    public final static Color BACKGROUND_COLOR = Color.SALMON;
 
     // TODO: Set a WORLD_SIZE
     /**
@@ -12,11 +14,12 @@ public class Constants {
      * of an ExtendViewport, and we'll run the game in landscape mode, so this will really end up
      * specifying the height of the world. We recommend 128.
      */
+    public final static float WORLD_SIZE = 128f;
 
 
     public static final String TEXTURE_ATLAS = "images/gigagal.pack.atlas";
 
     // TODO: Add a constant for the name of the standing-right sprite
-
+    public static final String STANDING_RIGHT_SPRITE = "standing-right";
 
 }

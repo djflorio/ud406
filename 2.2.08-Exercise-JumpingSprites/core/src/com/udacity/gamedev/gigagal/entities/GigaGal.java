@@ -103,10 +103,18 @@ public class GigaGal {
         TextureRegion region = Assets.instance.gigaGalAssets.standingRight;
 
         // TODO: Select the correct region based on facing and jumpState
-        if (facing == Facing.RIGHT) {
-            region = Assets.instance.gigaGalAssets.standingRight;
-        } else if (facing == Facing.LEFT) {
-            region = Assets.instance.gigaGalAssets.standingLeft;
+        if (jumpState == JumpState.GROUNDED) {
+            if (facing == Facing.RIGHT) {
+                region = Assets.instance.gigaGalAssets.standingRight;
+            } else if (facing == Facing.LEFT) {
+                region = Assets.instance.gigaGalAssets.standingLeft;
+            }
+        } else {
+            if (facing == Facing.RIGHT) {
+                region = Assets.instance.gigaGalAssets.jumpingRight;
+            } else if (facing == Facing.LEFT) {
+                region = Assets.instance.gigaGalAssets.jumpingLeft;
+            }
         }
 
         batch.draw(

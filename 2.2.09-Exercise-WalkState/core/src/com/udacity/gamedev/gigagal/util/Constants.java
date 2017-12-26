@@ -16,7 +16,8 @@ public class Constants {
     public static final String JUMPING_LEFT = "jumping-left";
 
     // TODO: Add constants for walk-2-right and walk-2-left sprite names
-
+    public static final String WALKING_RIGHT = "walk-2-right";
+    public static final String WALKING_LEFT = "walk-2-left";
 
     public static final Vector2 GIGAGAL_EYE_POSITION = new Vector2(16, 24);
     public static final float GIGAGAL_EYE_HEIGHT = 16.0f;

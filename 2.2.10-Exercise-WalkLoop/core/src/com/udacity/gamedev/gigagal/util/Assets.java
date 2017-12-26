@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 
@@ -49,8 +51,8 @@ public class Assets implements Disposable, AssetErrorListener {
         public final AtlasRegion jumpingRight;
 
         // TODO: Add animations for walking left and walking right
-
-
+        public final Animation walkingLeftAnimation;
+        public final Animation walkingRightAnimation;
 
 
         public GigaGalAssets(TextureAtlas atlas) {
@@ -64,15 +66,28 @@ public class Assets implements Disposable, AssetErrorListener {
 
 
             // TODO: Create an Array of AtlasRegions to hold the walking left frames
-
+            Array<AtlasRegion> walkingLeftFrames = new Array<AtlasRegion>();
 
             // TODO: Add the proper frames to the array
-
+            walkingLeftFrames.add(atlas.findRegion(Constants.WALKING_LEFT_2));
+            walkingLeftFrames.add(atlas.findRegion(Constants.WALKING_LEFT_1));
+            walkingLeftFrames.add(atlas.findRegion(Constants.WALKING_LEFT_2));
+            walkingLeftFrames.add(atlas.findRegion(Constants.WALKING_LEFT_3));
 
             // TODO: Create the walking left animation
-
+            walkingLeftAnimation = new Animation(Constants.WALK_LOOP_DURATION, walkingLeftFrames, Animation.PlayMode.LOOP);
 
             // TODO: Do the same with the walking right frames
+            Array<AtlasRegion> walkingRightFrames = new Array<AtlasRegion>();
+
+            // TODO: Add the proper frames to the array
+            walkingRightFrames.add(atlas.findRegion(Constants.WALKING_RIGHT_2));
+            walkingRightFrames.add(atlas.findRegion(Constants.WALKING_RIGHT_1));
+            walkingRightFrames.add(atlas.findRegion(Constants.WALKING_RIGHT_2));
+            walkingRightFrames.add(atlas.findRegion(Constants.WALKING_RIGHT_3));
+
+            // TODO: Create the walking left animation
+            walkingRightAnimation = new Animation(Constants.WALK_LOOP_DURATION, walkingRightFrames, Animation.PlayMode.LOOP);
         }
     }
 }

@@ -38,22 +38,22 @@ public class Animations extends ApplicationAdapter {
         viewport = new ExtendViewport(100, 100);
 
         // TODO: Set startTime using TimeUtils.nanoTime()
-
+        startTime = TimeUtils.nanoTime();
 
         Array<TextureRegion> walkLoopTextures = new Array<TextureRegion>();
 
         // TODO: Add walk-1-right.png to walkLoopTextures
-
+        walkLoopTextures.add(new TextureRegion(new Texture("walk-1-right.png")));
 
         // TODO: Add walk-2-right.png to walkLoopTextures
-
+        walkLoopTextures.add(new TextureRegion(new Texture("walk-2-right.png")));
 
         // TODO: Add walk-3-right.png to walkLoopTextures
-
+        walkLoopTextures.add(new TextureRegion(new Texture("walk-3-right.png")));
 
         // TODO: Initialize walkLoop with a new animation in LOOP_PINGPONG mode
         // Use WALK_LOOP_FRAME_DURATION
-
+        walkLoop = new Animation(WALK_LOOP_FRAME_DURATION, walkLoopTextures, PlayMode.LOOP_PINGPONG);
 
         Array<TextureRegion> explosionTextures = new Array<TextureRegion>();
         explosionTextures.add(new TextureRegion(new Texture("explosion-large.png")));
@@ -80,10 +80,10 @@ public class Animations extends ApplicationAdapter {
         batch.begin();
 
         // TODO: Compute the elapsed time in seconds since startTime
-
+        float elapsedTime = MathUtils.nanoToSec * (TimeUtils.nanoTime() - startTime);
 
         // TODO: Use getKeyFrame() to get the right frame from the walk loop
-        TextureRegion walkLoopTexture = new TextureRegion(new Texture("walk-1-right.png"));
+        TextureRegion walkLoopTexture = new TextureRegion(walkLoop.getKeyFrame(elapsedTime));
 
         drawRegionCentered(
                 batch,

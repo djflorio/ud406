@@ -47,7 +47,8 @@ public class Assets implements Disposable, AssetErrorListener {
         public final AtlasRegion jumpingRight;
 
         // TODO: Add AtlasRegions for walkingLeft and walkingRight sprites
-
+        public final AtlasRegion walkingRight;
+        public final AtlasRegion walkingLeft;
 
 
 
@@ -59,7 +60,8 @@ public class Assets implements Disposable, AssetErrorListener {
             jumpingRight = atlas.findRegion(Constants.JUMPING_RIGHT);
 
             // TODO: Find walkingLeft and walkingRight regions
-
+            walkingRight = atlas.findRegion(Constants.WALKING_RIGHT);
+            walkingLeft = atlas.findRegion(Constants.WALKING_LEFT);
 
 
         }

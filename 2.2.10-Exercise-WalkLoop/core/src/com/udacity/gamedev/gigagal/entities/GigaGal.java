@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.udacity.gamedev.gigagal.util.Assets;
 import com.udacity.gamedev.gigagal.util.Constants;
 
+import java.sql.Time;
+
 public class GigaGal {
 
     public final static String TAG = GigaGal.class.getName();
@@ -26,7 +28,7 @@ public class GigaGal {
     long jumpStartTime;
 
     // TODO: Add a walkStartTime
-
+    private long walkStartTime;
 
     public GigaGal() {
         position = new Vector2(20, 20);
@@ -76,7 +78,9 @@ public class GigaGal {
 
     private void moveLeft(float delta) {
         // TODO: If we're GROUNDED and not WALKING, save the walkStartTime
-
+        if (jumpState == JumpState.GROUNDED && walkState != WalkState.WALKING) {
+            walkStartTime = TimeUtils.nanoTime();
+        }
         walkState = WalkState.WALKING;
         facing = Facing.LEFT;
         position.x -= delta * Constants.GIGAGAL_MOVE_SPEED;
@@ -84,7 +88,9 @@ public class GigaGal {
 
     private void moveRight(float delta) {
         // TODO: If we're GROUNDED and not WALKING, save the walkStartTime
-
+        if (jumpState == JumpState.GROUNDED && walkState != WalkState.WALKING) {
+            walkStartTime = TimeUtils.nanoTime();
+        }
         walkState = WalkState.WALKING;
         facing = Facing.RIGHT;
         position.x += delta * Constants.GIGAGAL_MOVE_SPEED;
@@ -123,10 +129,10 @@ public class GigaGal {
         } else if (facing == Facing.RIGHT && walkState == WalkState.WALKING) {
 
             // TODO: Calculate how long we've been walking in seconds
-
+            float walkDuration = MathUtils.nanoToSec * (TimeUtils.nanoTime() - walkStartTime);
 
             // TODO: Select the correct frame from the walking right animation
-            region = Assets.instance.gigaGalAssets.walkingRight;
+            region = Assets.instance.gigaGalAssets.walkingRightAnimation.getKeyFrame(walkDuration);
         } else if (facing == Facing.LEFT && jumpState != JumpState.GROUNDED) {
             region = Assets.instance.gigaGalAssets.jumpingLeft;
         } else if (facing == Facing.LEFT && walkState == WalkState.STANDING) {
@@ -134,10 +140,10 @@ public class GigaGal {
         } else if (facing == Facing.LEFT && walkState == WalkState.WALKING) {
 
             // TODO: Calculate how long we've been walking in seconds
-
+            float walkDuration = MathUtils.nanoToSec * (TimeUtils.nanoTime() - walkStartTime);
 
             // TODO: Select the correct frame from the walking left animation
-            region = Assets.instance.gigaGalAssets.walkingLeft;
+            region = Assets.instance.gigaGalAssets.walkingLeftAnimation.getKeyFrame(walkDuration);
         }
 
         batch.draw(
