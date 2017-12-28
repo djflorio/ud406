@@ -57,6 +57,7 @@ public class Constants {
 
     // TODO: Create a constant for the bullet move speed
     // 150 works well
+    public static final float BULLET_SPEED = 150.0f;
 
 
     // Explosion

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.udacity.gamedev.gigagal.entities.Bullet;
 import com.udacity.gamedev.gigagal.entities.Enemy;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
@@ -21,7 +22,7 @@ public class Level {
     private DelayedRemovalArray<Enemy> enemies;
 
     // TODO: Add a DelayedRemovalArray of bullets
-
+    private DelayedRemovalArray<Bullet> bullets;
 
     public Level(Viewport viewport) {
         this.viewport = viewport;
