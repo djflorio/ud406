@@ -36,6 +36,8 @@ public class Level {
         platforms.add(new Platform(75, 90, 100, 65));
         platforms.add(new Platform(35, 55, 50, 20));
         platforms.add(new Platform(10, 20, 20, 9));
+        platforms.add(new Platform(200, 55, 50, 20));
+        platforms.add(new Platform(220, 20, 20, 9));
 
         gigaGal = new GigaGal(new Vector2(15, 40));
 

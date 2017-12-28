@@ -71,8 +71,9 @@ public class GigaGal {
         // Land on/fall off platforms
         if (jumpState != Enums.JumpState.JUMPING) {
             // TODO: If GigaGal is not RECOILING, set FALLING jump state
-
-            jumpState = Enums.JumpState.FALLING;
+            if (jumpState != JumpState.RECOILING) {
+                jumpState = Enums.JumpState.FALLING;
+            }
 
 
             for (Platform platform : platforms) {
@@ -80,7 +81,7 @@ public class GigaGal {
                     jumpState = Enums.JumpState.GROUNDED;
                     velocity.y = 0;
                     // TODO: Zero horizontal velocity
-
+                    velocity.x = 0;
                     position.y = platform.top + Constants.GIGAGAL_EYE_HEIGHT;
                 }
             }
@@ -113,13 +114,14 @@ public class GigaGal {
 
         // Move left/right
         // TODO: Disable left/right movement if RECOILING
-
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-            moveLeft(delta);
-        } else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            moveRight(delta);
-        } else {
-            walkState = Enums.WalkState.NOT_WALKING;
+        if (jumpState != JumpState.RECOILING) {
+            if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+                moveLeft(delta);
+            } else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+                moveRight(delta);
+            } else {
+                walkState = Enums.WalkState.NOT_WALKING;
+            }
         }
 
 
@@ -200,8 +202,8 @@ public class GigaGal {
 
     private void recoilFromEnemy(Direction direction) {
 
-        // TODO: Set RECOILING jump state
-        jumpState = JumpState.FALLING;
+        // TODO: Set RECOILING jump state;
+        jumpState = JumpState.RECOILING;
         velocity.y = Constants.KNOCKBACK_VELOCITY.y;
 
         if (direction == Direction.LEFT) {

@@ -8,6 +8,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.udacity.gamedev.gigagal.entities.Enemy;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
+import com.udacity.gamedev.gigagal.util.Assets;
+import com.udacity.gamedev.gigagal.util.Constants;
+import com.udacity.gamedev.gigagal.util.Utils;
 
 public class Level {
 
@@ -49,19 +52,19 @@ public class Level {
         gigaGal.render(batch);
 
         // TODO: Test draw the bullet
-
+        Utils.drawTextureRegion(batch, Assets.instance.bulletAssets.bullet, 60, 60);
 
         // TODO: Test draw the powerup
-
+        Utils.drawTextureRegion(batch, Assets.instance.powerupAssets.powerup, 40, 60);
 
         // TODO: Test draw the first frame of the explosion
-
+        batch.draw(Assets.instance.explosionAssets.explosion.getKeyFrame(0), 20, 60);
 
         // TODO: Test draw the second frame of the explosion
-
+        batch.draw(Assets.instance.explosionAssets.explosion.getKeyFrame(Constants.EXPLOSION_DURATION), 10, 60);
 
         // TODO: Test draw the third frame of the explosion
-
+        batch.draw(Assets.instance.explosionAssets.explosion.getKeyFrame(Constants.EXPLOSION_DURATION * 2), 0, 60);
 
     }
 

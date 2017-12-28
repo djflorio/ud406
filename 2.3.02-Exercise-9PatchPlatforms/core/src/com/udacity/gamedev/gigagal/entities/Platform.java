@@ -1,6 +1,7 @@
 package com.udacity.gamedev.gigagal.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.udacity.gamedev.gigagal.util.Assets;
 
 public class Platform {
 
@@ -21,7 +22,7 @@ public class Platform {
         float height = top - bottom;
 
         // TODO: Draw the platform using the NinePatch
-
+        Assets.instance.platformAssets.ninePatch.draw(batch, left, bottom, width, height);
     }
 
 }

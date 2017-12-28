@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
+import com.udacity.gamedev.gigagal.util.Assets;
 
 public class Level {
 
@@ -36,7 +37,7 @@ public class Level {
         }
 
         // TODO: Throw an enemy on the screen
-
+        batch.draw(Assets.instance.enemyAssets.enemy, 50, 50);
 
         gigaGal.render(batch);
 

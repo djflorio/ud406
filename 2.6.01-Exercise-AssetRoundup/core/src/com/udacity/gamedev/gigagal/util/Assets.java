@@ -26,7 +26,9 @@ public class Assets implements Disposable, AssetErrorListener {
 
     // TODO: Add instances of BulletAssets, ExplosionAssets, and PowerupAssets
     // Define those classes below
-
+    public BulletAssets bulletAssets;
+    public ExplosionAssets explosionAssets;
+    public PowerupAssets powerupAssets;
 
     private AssetManager assetManager;
 
@@ -46,6 +48,9 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyAssets = new EnemyAssets(atlas);
 
         // TODO: Initialize bulletAssets, explosionAssets, and powerupAssets
+        bulletAssets = new BulletAssets(atlas);
+        explosionAssets = new ExplosionAssets(atlas);
+        powerupAssets = new PowerupAssets(atlas);
 
 
     }
@@ -112,11 +117,11 @@ public class Assets implements Disposable, AssetErrorListener {
     public class BulletAssets {
 
         // TODO: Add an AtlasRegion to hold the bullet sprite
-
+        public final AtlasRegion bullet;
 
         public BulletAssets(TextureAtlas atlas) {
             // TODO: Find the bullet atlas region
-
+            bullet = atlas.findRegion(Constants.BULLET_SPRITE);
         }
 
     }
@@ -133,14 +138,19 @@ public class Assets implements Disposable, AssetErrorListener {
     public class ExplosionAssets {
 
         // TODO: Add an Animation
-
+        public final Animation explosion;
 
         public ExplosionAssets(TextureAtlas atlas) {
 
             // TODO: Populate the explosion animation
             // First find the appropriate AtlasRegions
             // Then pack them into an animation with the correct frame duration
+            Array<AtlasRegion> explosion_sprites = new Array<AtlasRegion>();
+            explosion_sprites.add(atlas.findRegion(Constants.EXPLOSION_SMALL));
+            explosion_sprites.add(atlas.findRegion(Constants.EXPLOSION_MEDIUM));
+            explosion_sprites.add(atlas.findRegion(Constants.EXPLOSION_LARGE));
 
+            explosion = new Animation(Constants.EXPLOSION_DURATION, explosion_sprites);
 
         }
     }
@@ -148,11 +158,11 @@ public class Assets implements Disposable, AssetErrorListener {
     public class PowerupAssets {
 
         // TODO: Add an AtlasRegion to hold the powerup sprite
-
+        public final AtlasRegion powerup;
 
         public PowerupAssets(TextureAtlas atlas) {
             // TODO: Find the powerup atlas region
-
+            powerup = atlas.findRegion(Constants.POWERUP_SPRITE);
         }
     }
 

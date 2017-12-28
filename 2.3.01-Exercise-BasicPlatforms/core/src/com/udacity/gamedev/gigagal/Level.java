@@ -3,23 +3,25 @@ package com.udacity.gamedev.gigagal;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.Array;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
+import com.udacity.gamedev.gigagal.entities.Platform;
 
 public class Level {
 
     GigaGal gigaGal;
 
     // TODO: Add an Array of Platforms
-
+    private Array<Platform> platforms;
 
     public Level() {
         gigaGal = new GigaGal();
 
         // TODO: Initialize the platform array
-
+        platforms = new Array<Platform>();
 
         // TODO: Add a test platform
-
+        platforms.add(new Platform(50, 30, 20, 20));
     }
 
     public void update(float delta) {
@@ -30,7 +32,9 @@ public class Level {
 
         renderer.begin(ShapeType.Filled);
         // TODO: Render all platforms in the platform array
-
+        for (Platform platform: platforms) {
+            platform.render(renderer);
+        }
         renderer.end();
 
         batch.begin();

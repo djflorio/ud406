@@ -22,7 +22,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public PlatformAssets platformAssets;
 
     // TODO: Add EnemyAssets member (defined at the bottom of the file. Start there)
-
+    public EnemyAssets enemyAssets;
 
     private AssetManager assetManager;
 
@@ -41,7 +41,7 @@ public class Assets implements Disposable, AssetErrorListener {
         platformAssets = new PlatformAssets(atlas);
 
         // TODO: Initialize enemyAssets
-
+        enemyAssets = new EnemyAssets(atlas);
     }
 
     @Override
@@ -107,11 +107,11 @@ public class Assets implements Disposable, AssetErrorListener {
     public class EnemyAssets {
 
         // TODO: Add AtlasRegion for the enemy
-
+        public final AtlasRegion enemy;
 
         public EnemyAssets(TextureAtlas atlas) {
             // TODO: Save the enemy sprite
-
+            enemy = atlas.findRegion(Constants.ENEMY_SPRITE);
         }
     }
 

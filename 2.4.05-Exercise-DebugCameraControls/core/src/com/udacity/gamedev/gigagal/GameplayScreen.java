@@ -46,7 +46,7 @@ public class GameplayScreen extends ScreenAdapter {
         level.update(delta);
 
         // TODO: Make sure that the camera update call is getting the delta time
-        chaseCam.update();
+        chaseCam.update(delta);
 
         viewport.apply();
         Gdx.gl.glClearColor(

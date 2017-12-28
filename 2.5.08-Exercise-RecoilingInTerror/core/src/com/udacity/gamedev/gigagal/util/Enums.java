@@ -11,8 +11,9 @@ public class Enums {
     public enum JumpState {
         JUMPING,
         FALLING,
-        GROUNDED
+        GROUNDED,
         // TODO: Add RECOILING jump state
+        RECOILING
 
     }
 

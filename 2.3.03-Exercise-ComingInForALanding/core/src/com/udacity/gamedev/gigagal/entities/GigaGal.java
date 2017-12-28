@@ -34,7 +34,7 @@ public class GigaGal {
     Vector2 position;
 
     // TODO: Add Vector2 to hold GigaGal's position last frame
-
+    private Vector2 lastPosition;
 
     Vector2 velocity;
 
@@ -49,7 +49,7 @@ public class GigaGal {
         position = new Vector2(20, 20);
 
         // TODO: Initialize a new Vector2 for lastFramePosition
-
+        lastPosition = new Vector2(position);
 
         velocity = new Vector2();
         jumpState = JumpState.FALLING;
@@ -61,7 +61,7 @@ public class GigaGal {
     public void update(float delta, Array<Platform> platforms) {
         // TODO: Update lastFramePosition
         // You'll want to use Vector2.set()
-
+        lastPosition.set(position);
 
         velocity.y -= Constants.GRAVITY;
         position.mulAdd(velocity, delta);
@@ -76,16 +76,17 @@ public class GigaGal {
             }
 
             // TODO: For each platform, call landedOnPlatform()
+            for (Platform platform: platforms) {
+                if (landedOnPlatform(platform)) {
+                    // TODO: If true, set jumpState to GROUNDED
+                    // TODO: Zero vertical velocity
+                    // TODO: Make sure GigaGal's feet aren't sticking into the platform
+                    jumpState = JumpState.GROUNDED;
+                    velocity.y = 0;
+                    position.y = platform.top + Constants.GIGAGAL_EYE_HEIGHT;
+                }
 
-
-            // TODO: If true, set jumpState to GROUNDED
-
-
-            // TODO: Zero vertical velocity
-
-
-            // TODO: Make sure GigaGal's feet aren't sticking into the platform
-
+            }
 
         }
 
@@ -113,20 +114,28 @@ public class GigaGal {
 
     boolean landedOnPlatform(Platform platform) {
 
+        boolean leftFootIn = false;
+        boolean rightFootIn = false;
+        boolean straddle = false;
+
         // TODO: First check if GigaGal's feet were above the platform top last frame and below the platform top this frame
+        if (lastPosition.y - Constants.GIGAGAL_EYE_HEIGHT >= platform.top &&
+                position.y - Constants.GIGAGAL_EYE_HEIGHT < platform.top) {
 
+            // TODO: If so, find the position of GigaGal's left and right toes
+            float leftToe = position.x - (Constants.GIGAGAL_STANCE_WIDTH / 2);
+            float rightToe = position.x + (Constants.GIGAGAL_STANCE_WIDTH / 2);
 
-        // TODO: If so, find the position of GigaGal's left and right toes
+            // TODO: See if either of GigaGal's toes are on the platform
+            leftFootIn = (platform.left < leftToe && platform.right > leftToe);
+            rightFootIn = (platform.left < rightToe && platform.right > rightToe);
+            straddle = (platform.left > leftToe && platform.right < rightToe);
 
+            // TODO: See if GigaGal is straddling the platform
 
-        // TODO: See if either of GigaGal's toes are on the platform
-
-
-        // TODO: See if GigaGal is straddling the platform
-
-
-        // TODO: Return whether or not GigaGal had landed on the platform
-        return false;
+            // TODO: Return whether or not GigaGal had landed on the platform
+        }
+        return leftFootIn || rightFootIn || straddle;
     }
 
 

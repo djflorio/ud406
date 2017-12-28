@@ -16,7 +16,7 @@ public class GigaGal {
     public final static String TAG = GigaGal.class.getName();
 
     // TODO: Add a spawnLocation Vector2
-
+    private Vector2 spawnLocation;
 
     public Vector2 position;
     Vector2 lastFramePosition;
@@ -31,42 +31,37 @@ public class GigaGal {
 
 
     // TODO: Accept and set a spawnLocation
-    public GigaGal(Vector2 position) {
-        this.position = position;
-
+    public GigaGal(Vector2 spawnLocation) {
+        this.spawnLocation = spawnLocation;
         // TODO: Remove the old constructor
-        this.position = position;
-        lastFramePosition = new Vector2(position);
-        velocity = new Vector2();
-        jumpState = JumpState.FALLING;
-        facing = Facing.RIGHT;
-        walkState = WalkState.STANDING;
 
         // TODO: Create new Vector2s for position, lastFramePosition, and velocity
-
+        this.position = new Vector2();
+        this.lastFramePosition = new Vector2();
+        this.velocity = new Vector2();
 
         // TODO: Call init()
-
+        init();
     }
 
     public void init(){
         // TODO: Set GG back to her spawnLocation
-
+        position.set(spawnLocation);
 
         // TODO: Set lastFramePosition
-
+        lastFramePosition.set(spawnLocation);
 
         // TODO: Set velocity to zero
-
+        velocity.set(0, 0);
 
         // TODO: Set jumpState to FALLING
-
+        jumpState = JumpState.FALLING;
 
         // TODO: Set Facing to RIGHT
-
+        facing = Facing.RIGHT;
 
         // TODO: Set walkState to STANDING
-
+        walkState = WalkState.STANDING;
     }
 
     public void update(float delta, Array<Platform> platforms) {
@@ -76,7 +71,9 @@ public class GigaGal {
 
 
         // TODO: If GigaGal is below the kill plane, call init()
-
+        if (position.y < Constants.KILL_PLANE_HEIGHT) {
+            init();
+        }
 
         if (jumpState != JumpState.JUMPING) {
             jumpState = JumpState.FALLING;

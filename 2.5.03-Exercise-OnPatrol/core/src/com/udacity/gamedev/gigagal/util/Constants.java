@@ -46,6 +46,6 @@ public class Constants {
     public static final Vector2 ENEMY_CENTER = new Vector2(14, 22);
 
     // TODO: Add a constant for ENEMY_MOVEMENT_SPEED. 10 works well.
-
+    public static final float ENEMY_SPEED = 10.0f;
 
 }

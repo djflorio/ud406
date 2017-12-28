@@ -1,6 +1,7 @@
 package com.udacity.gamedev.gigagal;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
@@ -35,7 +36,7 @@ public class Level {
         platforms.add(new Platform(10, 20, 20, 9));
 
         // TODO: Make sure GigaGal spawns on a platform
-        gigaGal = new GigaGal();
+        gigaGal = new GigaGal(new Vector2(15, 150));
 
     }
 }
