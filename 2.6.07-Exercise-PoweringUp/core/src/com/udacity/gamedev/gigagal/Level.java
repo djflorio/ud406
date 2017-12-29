@@ -10,6 +10,7 @@ import com.udacity.gamedev.gigagal.entities.Enemy;
 import com.udacity.gamedev.gigagal.entities.Explosion;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
+import com.udacity.gamedev.gigagal.entities.Powerup;
 import com.udacity.gamedev.gigagal.util.Enums.Direction;
 
 public class Level {
@@ -25,7 +26,7 @@ public class Level {
     private DelayedRemovalArray<Explosion> explosions;
 
     // TODO: Add a DelayedRemovalArray of Powerups
-
+    private DelayedRemovalArray<Powerup> powerups;
 
     public Level(Viewport viewport) {
         this.viewport = viewport;
@@ -76,6 +77,9 @@ public class Level {
         }
 
         // TODO: Render the powerups
+        for (Powerup powerup : powerups) {
+            powerup.render(batch);
+        }
 
         for (Enemy enemy : enemies) {
             enemy.render(batch);
@@ -103,7 +107,7 @@ public class Level {
         explosions = new DelayedRemovalArray<Explosion>();
 
         // TODO: Initialize powerups array
-
+        powerups = new DelayedRemovalArray<Powerup>();
 
 
         platforms.add(new Platform(15, 100, 30, 20));
@@ -117,7 +121,7 @@ public class Level {
         platforms.add(new Platform(10, 20, 20, 9));
 
         // TODO: Add some powerups to the level
-
+        powerups.add(new Powerup(new Vector2(50, 60)));
     }
 
     public Array<Platform> getPlatforms() {
@@ -129,7 +133,7 @@ public class Level {
     }
 
     // TODO: Create powerups getter
-
+    public DelayedRemovalArray<Powerup> getPowerups() { return powerups; }
 
     public Viewport getViewport() {
         return viewport;

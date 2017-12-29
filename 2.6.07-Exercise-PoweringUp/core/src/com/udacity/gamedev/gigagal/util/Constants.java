@@ -28,6 +28,7 @@ public class Constants {
     public static final float MAX_JUMP_DURATION = .1f;
 
     // TODO: Add constant for GigaGal's initial ammo
+    public static final int INITIAL_AMMO = 10;
 
 
     public static final String STANDING_RIGHT = "standing-right";
@@ -73,6 +74,6 @@ public class Constants {
     public static final Vector2 POWERUP_CENTER = new Vector2(7, 5);
 
     // TODO: Add constant for how much ammo a powerup contains
-
+    public static final int AMMO_PICKUP = 10;
 
 }

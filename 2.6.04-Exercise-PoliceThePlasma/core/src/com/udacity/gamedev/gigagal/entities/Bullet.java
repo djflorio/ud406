@@ -15,7 +15,7 @@ public class Bullet {
     private final Level level;
 
     // TODO: Add boolean active flag
-
+    public boolean active;
 
     private Vector2 position;
 
@@ -25,7 +25,7 @@ public class Bullet {
         this.direction = direction;
 
         // TODO: Set active to true
-
+        this.active = true;
     }
 
     public void update(float delta) {
@@ -39,13 +39,15 @@ public class Bullet {
         }
 
         // TODO: Get the world width from the level's viewport
-
+        float worldWidth = level.getViewport().getWorldWidth();
 
         // TODO: Get the level's viewport's camera's horizontal position
-
+        float camXPos = level.getViewport().getCamera().position.x;
 
         // TODO: If the bullet is offscreen, set active = false
-
+        if (position.x < camXPos - worldWidth / 2 || position.x > camXPos + worldWidth / 2) {
+            active = false;
+        }
 
     }
 

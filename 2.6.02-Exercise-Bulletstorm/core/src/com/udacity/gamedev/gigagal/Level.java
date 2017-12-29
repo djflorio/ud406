@@ -1,6 +1,7 @@
 package com.udacity.gamedev.gigagal;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
@@ -38,10 +39,16 @@ public class Level {
         // TODO: Spawn a bullet in a random direction, at a random position
         // At a position within some reasonable rectangle
         // You'll want to complete the spawnBullet() method below first
+        Vector2 randPos = new Vector2(MathUtils.random(70, 120), MathUtils.random(70, 200));
+        float randDirNum = MathUtils.random(1);
+        Direction randDir = randDirNum >= 0.5f ? Direction.RIGHT : Direction.LEFT;
+        spawnBullet(randPos, randDir);
 
 
         // TODO: Update the bullets
-
+        for (Bullet bullet: bullets) {
+            bullet.update(delta);
+        }
 
         // Update Enemies
         for (int i = 0; i < enemies.size; i++) {
@@ -64,7 +71,9 @@ public class Level {
         gigaGal.render(batch);
 
         // TODO: Render the bullets
-
+        for (Bullet bullet: bullets) {
+            bullet.render(batch);
+        }
     }
 
     private void initializeDebugLevel() {
@@ -74,7 +83,7 @@ public class Level {
         platforms = new Array<Platform>();
 
         // TODO: Initialize bullets array
-
+        bullets = new DelayedRemovalArray<Bullet>();
 
         enemies = new DelayedRemovalArray<Enemy>();
 
@@ -115,7 +124,7 @@ public class Level {
 
     public void spawnBullet(Vector2 position, Direction direction) {
         // TODO: Complete this method for adding new bullets to the bullets array
-
+        bullets.add(new Bullet(position, direction));
     }
 
 

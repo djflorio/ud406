@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.udacity.gamedev.gigagal.entities.Bullet;
 import com.udacity.gamedev.gigagal.entities.Enemy;
+import com.udacity.gamedev.gigagal.entities.Explosion;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
 import com.udacity.gamedev.gigagal.util.Enums.Direction;
@@ -23,7 +24,7 @@ public class Level {
     private DelayedRemovalArray<Bullet> bullets;
 
     // TODO: Add a DelayedRemovalArray of Explosions
-
+    private DelayedRemovalArray<Explosion> explosions;
 
     public Level(Viewport viewport) {
         this.viewport = viewport;
@@ -51,6 +52,7 @@ public class Level {
             enemy.update(delta);
             if (enemy.health < 1) {
                 // TODO: Spawn an explosion at the enemy position
+                explosions.add(new Explosion(enemy.position));
 
                 enemies.removeIndex(i);
             }
@@ -58,7 +60,14 @@ public class Level {
         enemies.end();
 
         // TODO: Remove any explosions that are finished
+        explosions.begin();
+        for (int i = 0; i < explosions.size; i++) {
+            if (explosions.get(i).isFinished()) {
+                explosions.removeIndex(i);
+            }
 
+        }
+        explosions.end();
 
     }
 
@@ -80,7 +89,9 @@ public class Level {
         }
 
         // TODO: Render the explosions
-
+        for (Explosion explosion : explosions) {
+            explosion.render(batch);
+        }
 
     }
 
@@ -93,7 +104,7 @@ public class Level {
         enemies = new DelayedRemovalArray<Enemy>();
 
         // TODO: Initialize explosions collection
-
+        explosions = new DelayedRemovalArray<Explosion>();
 
         platforms.add(new Platform(15, 100, 30, 20));
 
@@ -137,6 +148,6 @@ public class Level {
 
     public void spawnExplosion(Vector2 position) {
         // TODO: Add a new explosion at the specified position
-
+        explosions.add(new Explosion(position));
     }
 }

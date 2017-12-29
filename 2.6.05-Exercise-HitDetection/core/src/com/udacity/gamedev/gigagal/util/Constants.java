@@ -52,10 +52,10 @@ public class Constants {
     public static final float ENEMY_COLLISION_RADIUS = 15;
 
     // TODO: Add constant for enemy health (5 works well)
-
+    public static final int ENEMY_HEALTH = 5;
 
     // TODO: Add constant for enemy hit detection radius (17 works well)
-
+    public static final float ENEMY_HIT_RADIUS = 17.0f;
 
     // Bullet
     public static final String BULLET_SPRITE = "bullet";

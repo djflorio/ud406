@@ -36,13 +36,13 @@ public class Bullet {
         for (Enemy enemy : level.getEnemies()) {
 
             // TODO: Check if the bullet is within the enemy hit detection radius
-
-
+            if (position.dst(enemy.position) < Constants.ENEMY_COLLISION_RADIUS) {
                 // TODO: If so, set active = false
-
+                active = false;
 
                 // TODO: And decrement enemy health
-
+                enemy.health_counter--;
+            }
 
         }
 

@@ -48,7 +48,9 @@ public class Level {
             Enemy enemy = enemies.get(i);
             enemy.update(delta);
             // TODO: If enemy health is less than 1, remove the enemy from the enemies collection
-
+            if (enemy.health_counter < 1) {
+                enemies.removeValue(enemy, false);
+            }
         }
         enemies.end();
 
