@@ -83,11 +83,11 @@ public class Constants {
 
     // TODO: Add a constant for the exit portal frame duration
     // A tenth of a second gives a nice animation
-
+    public static final float EXIT_PORTAL_DURATION = 0.10f;
 
     // TODO: Add a constant for the Exit portal's default location
     // Something like (200, 200) is fine
-
+    public static final Vector2 EXIT_PORTAL_DEFAULT_LOC = new Vector2(200, 200);
 
     // Level Loading
     public static final String LEVEL_DIR = "levels";

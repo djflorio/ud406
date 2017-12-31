@@ -50,6 +50,19 @@ public class OnscreenControls {
         );
 
         // TODO: Render the shoot and jump buttons, using the shootCenter and jumpCenter defined below
+        Utils.drawTextureRegion(
+                batch,
+                Assets.instance.onscreenControlsAssets.shoot,
+                shootCenter,
+                Constants.BUTTON_CENTER
+        );
+
+        Utils.drawTextureRegion(
+                batch,
+                Assets.instance.onscreenControlsAssets.jump,
+                jumpCenter,
+                Constants.BUTTON_CENTER
+        );
 
         batch.end();
     }
@@ -60,6 +73,13 @@ public class OnscreenControls {
 
 
         // TODO: Set shootCenter and jumpCenter, mirroring the positions of the move buttons
-
+        shootCenter.set(
+                viewport.getWorldWidth() - Constants.BUTTON_RADIUS * 3 / 4,
+                Constants.BUTTON_RADIUS
+        );
+        jumpCenter.set(
+                viewport.getWorldWidth() - Constants.BUTTON_RADIUS * 2,
+                Constants.BUTTON_RADIUS * 3 / 4
+        );
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.udacity.gamedev.gigagal.overlays.GigaGalHud;
 import com.udacity.gamedev.gigagal.util.Assets;
 import com.udacity.gamedev.gigagal.util.ChaseCam;
 import com.udacity.gamedev.gigagal.util.Constants;
@@ -19,7 +20,7 @@ public class GameplayScreen extends ScreenAdapter {
     private ChaseCam chaseCam;
 
     // TODO: Add a new GigaGalHud
-
+    private GigaGalHud gigaGalHud;
 
     @Override
     public void show() {
@@ -30,7 +31,7 @@ public class GameplayScreen extends ScreenAdapter {
         chaseCam = new ChaseCam();
 
         // TODO: Initialize the GigaGalHud
-
+        gigaGalHud = new GigaGalHud();
         startNewLevel();
     }
 
@@ -38,7 +39,7 @@ public class GameplayScreen extends ScreenAdapter {
     public void resize(int width, int height) {
 
         // TODO: Update the HUD's viewport
-
+        gigaGalHud.viewport.update(width, height, true);
         level.viewport.update(width, height, true);
         chaseCam.camera = level.viewport.getCamera();
     }
@@ -66,7 +67,7 @@ public class GameplayScreen extends ScreenAdapter {
         level.render(batch);
 
         // TODO: Render the HUD
-
+        gigaGalHud.render(batch);
     }
 
     private void startNewLevel() {

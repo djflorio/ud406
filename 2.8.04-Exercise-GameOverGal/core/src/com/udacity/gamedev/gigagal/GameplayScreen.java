@@ -89,7 +89,16 @@ public class GameplayScreen extends ScreenAdapter {
         }
 
         // TODO: Repeat the level victory logic to display the game over screen and call levelFailed()
-
+        if (level.gameOver) {
+            if (levelEndOverlayStartTime == 0) {
+                levelEndOverlayStartTime = TimeUtils.nanoTime();
+            }
+            gameOverOverlay.render(batch);
+            if (Utils.secondsSince(levelEndOverlayStartTime) > Constants.LEVEL_END_DURATION) {
+                levelEndOverlayStartTime = 0;
+                levelFailed();
+            }
+        }
     }
 
     private void startNewLevel() {

@@ -49,18 +49,25 @@ public class OnscreenControls extends InputAdapter {
         if (viewportPosition.dst(shootCenter) < Constants.BUTTON_RADIUS) {
 
             // TODO: Call shoot() on GigaGal
+            gigaGal.shoot();
 
         } else if (viewportPosition.dst(jumpCenter) < Constants.BUTTON_RADIUS) {
 
             // TODO: Save the jumpPointer and set gigaGal.jumpButtonPressed = true
+            jumpPointer = pointer;
+            gigaGal.jumpButtonPressed = true;
 
         } else if (viewportPosition.dst(moveLeftCenter) < Constants.BUTTON_RADIUS) {
 
             // TODO: Save the moveLeftPointer, and set gigaGal.leftButtonPressed = true
+            moveLeftPointer = pointer;
+            gigaGal.leftButtonPressed = true;
 
         } else if (viewportPosition.dst(moveRightCenter) < Constants.BUTTON_RADIUS) {
 
             // TODO: Save the moveRightPointer, and set gigaGal.rightButtonPressed = true
+            moveRightPointer = pointer;
+            gigaGal.rightButtonPressed = true;
 
         }
 
@@ -75,18 +82,22 @@ public class OnscreenControls extends InputAdapter {
 
             // TODO: Handle the case where the left button touch has been dragged to the right button
             // Inform GigaGal that the left button is no longer pressed
-
+            gigaGal.leftButtonPressed = false;
             // Inform GigaGal that the right button is now pressed
-
+            gigaGal.rightButtonPressed = true;
             // Zero moveLeftPointer
-
+            moveLeftPointer = 0;
             // Save moveRightPointer
-
+            moveRightPointer = pointer;
         }
 
         if (pointer == moveRightPointer && viewportPosition.dst(moveLeftCenter) < Constants.BUTTON_RADIUS) {
 
             // TODO: Handle the case where the right button touch has been dragged to the left button
+            gigaGal.rightButtonPressed = false;
+            gigaGal.leftButtonPressed = true;
+            moveLeftPointer = pointer;
+            moveRightPointer = 0;
 
         }
 
@@ -105,8 +116,15 @@ public class OnscreenControls extends InputAdapter {
         }
 
         // TODO: If the moveLeftPointer is no longer touched, inform GigaGal and zero moveLeftPointer
-
+        if (!Gdx.input.isTouched(moveLeftPointer)) {
+            gigaGal.leftButtonPressed = false;
+            moveLeftPointer = 0;
+        }
         // TODO: Do the same for moveRightPointer
+        if (!Gdx.input.isTouched(moveRightPointer)) {
+            gigaGal.rightButtonPressed = false;
+            moveRightPointer = 0;
+        }
 
         Utils.drawTextureRegion(
                 batch,

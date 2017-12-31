@@ -47,6 +47,9 @@ public class GameplayScreen extends ScreenAdapter {
 
         // TODO: Use Gdx.input.setInputProcessor() to send touch events to onscreenControls
         // TODO: When you're done testing, use onMobile() turn off the controls when not on a mobile device
+        if (onMobile()) {
+            Gdx.input.setInputProcessor(onscreenControls);
+        }
 
         startNewLevel();
     }
@@ -89,7 +92,9 @@ public class GameplayScreen extends ScreenAdapter {
         level.render(batch);
 
         // TODO: When you're done testing, use onMobile() turn off the controls when not on a mobile device
-        onscreenControls.render(batch);
+        if (onMobile()) {
+            onscreenControls.render(batch);
+        }
 
         hud.render(batch, level.getGigaGal().getLives(), level.getGigaGal().getAmmo(), level.score);
         renderLevelEndOverlays(batch);

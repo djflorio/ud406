@@ -7,8 +7,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.udacity.gamedev.gigagal.Level;
 import com.udacity.gamedev.gigagal.entities.Enemy;
+import com.udacity.gamedev.gigagal.entities.ExitPortal;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
+import com.udacity.gamedev.gigagal.entities.Powerup;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -38,10 +40,10 @@ public class LevelLoader {
             loadPlatforms(platforms, level);
 
             // TODO: Get the non-platform level objects from composite (using the Constants.LEVEL_IMAGES key)
-
+            JSONArray nonPlatforms = (JSONArray) composite.get(Constants.LEVEL_IMAGES);
 
             // TODO: Call loadNonPlatformEntities()
-
+            loadNonPlatformEntities(level, nonPlatforms);
 
         } catch (Exception ex) {
             Gdx.app.error(TAG, ex.getMessage());
@@ -105,7 +107,9 @@ public class LevelLoader {
 
             // TODO: Get the lower left corner of the object
             // Remember to use safeGetFloat()
-            Vector2 lowerLeftCorner = new Vector2();
+            final float x = safeGetFloat(item, Constants.LEVEL_X_KEY);
+            final float y = safeGetFloat(item, Constants.LEVEL_Y_KEY);
+            Vector2 lowerLeftCorner = new Vector2(x, y);
 
 
             // Check if this object is GigaGal
@@ -120,10 +124,20 @@ public class LevelLoader {
             }
 
             // TODO: Go through the same process to load the Exit Portal
+            if (item.get(Constants.LEVEL_IMAGENAME_KEY).equals(Constants.EXIT_PORTAL_SPRITE_1)) {
+                final Vector2 portalPosition = lowerLeftCorner.add(Constants.EXIT_PORTAL_CENTER);
+                Gdx.app.log(TAG, "Loaded portal at " + portalPosition);
 
+                level.setExitPortal(new ExitPortal(portalPosition));
+            }
 
             // TODO: Load the Powerups
+            if (item.get(Constants.LEVEL_IMAGENAME_KEY).equals(Constants.POWERUP_SPRITE)) {
+                final Vector2 powerupPosition = lowerLeftCorner.add(Constants.POWERUP_CENTER);
+                Gdx.app.log(TAG, "Loaded powerup at " + powerupPosition);
 
+                level.getPowerups().add(new Powerup(powerupPosition));
+            }
         }
     }
 }

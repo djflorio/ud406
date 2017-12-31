@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.udacity.gamedev.gigagal.entities.Bullet;
 import com.udacity.gamedev.gigagal.entities.Enemy;
+import com.udacity.gamedev.gigagal.entities.ExitPortal;
 import com.udacity.gamedev.gigagal.entities.Explosion;
 import com.udacity.gamedev.gigagal.entities.GigaGal;
 import com.udacity.gamedev.gigagal.entities.Platform;
@@ -22,7 +23,7 @@ public class Level {
     private GigaGal gigaGal;
 
     // TODO: Add an ExitPortal member
-
+    private ExitPortal exitPortal;
 
     private Array<Platform> platforms;
     private DelayedRemovalArray<Enemy> enemies;
@@ -41,7 +42,7 @@ public class Level {
         powerups = new DelayedRemovalArray<Powerup>();
 
         // TODO: Initialize the exit portal with its default location
-
+        exitPortal = new ExitPortal(Constants.EXIT_PORTAL_DEFAULT_LOC);
     }
 
 
@@ -89,7 +90,7 @@ public class Level {
         }
 
         // TODO: Render the exit portal
-
+        exitPortal.render(batch);
 
         for (Powerup powerup : powerups) {
             powerup.render(batch);
@@ -118,7 +119,7 @@ public class Level {
 
         // TODO: Add an exit portal to the debug level
         // Around (150, 150) will do fine
-
+        exitPortal = new ExitPortal(new Vector2(150, 150));
 
         platforms = new Array<Platform>();
         bullets = new DelayedRemovalArray<Bullet>();

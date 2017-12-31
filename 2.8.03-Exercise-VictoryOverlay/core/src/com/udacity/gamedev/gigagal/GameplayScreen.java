@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.udacity.gamedev.gigagal.overlays.GigaGalHud;
 import com.udacity.gamedev.gigagal.overlays.VictoryOverlay;
 import com.udacity.gamedev.gigagal.util.Assets;
@@ -75,19 +76,20 @@ public class GameplayScreen extends ScreenAdapter {
         if (level.victory) {
             if (levelEndOverlayStartTime == 0) {
                 // TODO: Set levelEndOverlayStartTime = TimeUtils.nanoTime()
-
+                levelEndOverlayStartTime = TimeUtils.nanoTime();
                 // TODO: Call init on the victory overlay
-
+                victoryOverlay.init();
             }
 
             // TODO: Render the victory overlay
+            victoryOverlay.render(batch);
 
             if (Utils.secondsSince(levelEndOverlayStartTime) > Constants.LEVEL_END_DURATION) {
 
                 // TODO: Reset levelEndOverlayStartTime to 0
-
+                levelEndOverlayStartTime = 0;
                 // TODO: Call levelComplete()
-
+                levelComplete();
             }
         }
     }

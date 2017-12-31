@@ -3,6 +3,7 @@ package com.udacity.gamedev.gigagal.overlays;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.udacity.gamedev.gigagal.util.Constants;
@@ -33,7 +34,7 @@ public class GameOverOverlay {
 
         // TODO: Draw a game over message
         // Feel free to get more creative with this screen. Perhaps you could cover the screen in enemy robots?
-
+        font.draw(batch, "GAME OVER", viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0, Align.center, false);
 
         batch.end();
 
